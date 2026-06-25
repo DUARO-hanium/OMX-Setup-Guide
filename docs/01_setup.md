@@ -1,4 +1,4 @@
-# LeRobot 설치 가이드
+# LeRobot Setup Guide
 
 ## 시스템 환경
 - OS: Ubuntu 24.04 (WSL2 포함)
