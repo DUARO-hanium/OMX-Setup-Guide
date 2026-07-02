@@ -2,17 +2,34 @@
 
 ## 순서 요약
 ```
-1. USB 포트 찾기
-2. 텔레오퍼레이션 실행
-3. (선택) udev rules 설정
+1. WSL2 USB 연결 (Windows PowerShell)
+2. USB 포트 찾기
+3. 텔레오퍼레이션 실행
+4. (선택) udev rules 설정
 ```
 
 ---
 
-## 1. USB 포트 찾기
+## 1. WSL2 USB 연결
+
+```powershell
+# Windows PowerShell 관리자 권한
+usbipd list
+# → OMX Follower, OMX Leader BUSID 확인
+
+usbipd attach --wsl --busid <Follower BUSID>
+usbipd attach --wsl --busid <Leader BUSID>
+```
+
+> 카메라도 같이 쓸 경우 카메라 BUSID도 추가로 attach 필요(04_camera_moveit.md 참고)
+
+---
+
+## 2. USB 포트 찾기
 
 Leader, Follower 각각 뽑았다 꽂으면서 포트 확인:
 ```bash
+conda activate lerobot
 lerobot-find-port
 ```
 
@@ -38,7 +55,7 @@ Reconnect the USB cable.
 
 ---
 
-## 2. 텔레오퍼레이션 실행
+## 3. 텔레오퍼레이션 실행
 
 ### 기본 실행
 ```bash
@@ -69,7 +86,7 @@ python -m lerobot.teleoperate \
 
 ---
 
-## 3. udev rules 설정 (선택사항)
+## 4. udev rules 설정 (선택사항)
 
 > ⚠️ WSL2 환경에서는 적용 안 될 수 있음 (네이티브 Ubuntu 권장)
 > 로봇을 자주 뽑았다 꽂는 경우에만 설정 권장
