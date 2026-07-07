@@ -18,6 +18,14 @@ usbipd list
 usbipd attach --wsl --busid <카메라 BUSID>
 ```
 
+권한 설정:
+```bash
+sudo chmod 666 /dev/video0
+sudo chmod 666 /dev/video1
+```
+
+> ⚠️ WSL 재시작할 때마다 usbipd attach와 chmod 다시 해야 함
+
 카메라 실행:
 ```bash
 source /opt/ros/jazzy/setup.bash
