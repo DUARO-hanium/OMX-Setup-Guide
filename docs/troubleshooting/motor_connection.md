@@ -1,4 +1,4 @@
-# Troubleshooting
+# Motor Connection Troubleshooting
 
 ## Motor ID Missing (XL430, ID 11~13)
 
