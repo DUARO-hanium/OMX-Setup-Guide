@@ -105,7 +105,7 @@ ls /dev/video*
 
 ---
 
-## usb_cam Select timeout 에러
+## usb_cam Select timeout 에러 (해결됨)
 
 ### 문제 상황
 ```
@@ -113,12 +113,21 @@ Select timeout, exiting...
 terminate called after throwing an instance of 'char const*'
 ```
 
-### 시도 중
+### 원인
+YUYV 포맷이 WSL2 환경에서 불안정하게 캡처됨
+
+### 해결 과정
+```
+YUYV (기본값)     → Select timeout 에러
+mjpeg             → 드라이버가 지원 안 하는 포맷 에러
+raw_mjpeg         → timeout은 해결되지만 화면 색이 깨짐 (무지개처럼 지직거림)
+mjpeg2rgb         → 정상 작동
+```
+
+### 최종 해결 
 ```bash
 ros2 run usb_cam usb_cam_node_exe --ros-args \
-  -p pixel_format:=raw_mjpeg \
+  -p pixel_format:=mjpeg2rgb \
   -p image_width:=640 \
   -p image_height:=480
 ```
-
-> ⚠️ 미해결 상태, 추후 업데이트 예정
