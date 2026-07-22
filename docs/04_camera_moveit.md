@@ -29,7 +29,10 @@ sudo chmod 666 /dev/video1
 카메라 실행:
 ```bash
 source /opt/ros/jazzy/setup.bash
-ros2 run usb_cam usb_cam_node_exe
+ros2 run usb_cam usb_cam_node_exe --ros-args \
+  -p pixel_format:=mjpeg2rgb \
+  -p image_width:=640 \
+  -p image_height:=480
 ```
 
 화면 확인:
